@@ -1,0 +1,865 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Reach for a Star El Paso | Granting Wishes Since 1982</title>
+  <meta name="description" content="Reach for a Star El Paso has granted wishes to critically ill children across West Texas and Southern New Mexico since 1982.">
+  <meta property="og:title" content="Reach for a Star El Paso">
+  <meta property="og:description" content="Granting wishes to critically ill children across West Texas & Southern New Mexico since 1982.">
+  <meta property="og:image" content="images/banner.jpg">
+  <link rel="icon" href="images/logo.jpg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Nunito:wght@400;600;700;800&family=Yellowtail&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --navy: #1c2a63;
+      --navy-deep: #121c47;
+      --star: #f7cf3c;
+      --star-soft: #fde9a0;
+      --sky: #e3ebfb;
+      --sky-deep: #c9d7f5;
+      --cream: #fffaf0;
+      --ink: #1f2440;
+      --muted: #5b6182;
+      --white: #ffffff;
+      --radius: 22px;
+      --shadow-sm: 0 2px 8px rgba(28, 42, 99, .08);
+      --shadow: 0 12px 40px rgba(28, 42, 99, .12);
+      --shadow-lg: 0 24px 60px rgba(28, 42, 99, .18);
+      --max: 1180px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+    body {
+      margin: 0;
+      font-family: "Nunito", system-ui, sans-serif;
+      font-size: 17px;
+      line-height: 1.65;
+      color: var(--ink);
+      background: var(--white);
+      -webkit-font-smoothing: antialiased;
+    }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; }
+    h1, h2, h3 { font-family: "Fraunces", Georgia, serif; color: var(--navy); line-height: 1.15; margin: 0; }
+    h2 { font-size: clamp(2rem, 4vw, 2.9rem); font-weight: 800; letter-spacing: -.01em; }
+    h3 { font-size: 1.3rem; font-weight: 600; }
+    p { margin: 0; }
+
+    .wrap { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+    .script { font-family: "Yellowtail", cursive; font-weight: 400; color: var(--star); }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-weight: 800; font-size: .8rem; letter-spacing: .14em; text-transform: uppercase;
+      color: var(--navy); opacity: .75; margin-bottom: 14px;
+    }
+    .eyebrow svg { width: 14px; height: 14px; fill: var(--star); }
+    .section { padding: 110px 0; }
+    .section-head { text-align: center; max-width: 680px; margin: 0 auto 56px; }
+    .section-head p { color: var(--muted); margin-top: 16px; font-size: 1.1rem; }
+
+    /* ---------- Buttons ---------- */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      font: 800 1rem "Nunito", sans-serif;
+      padding: 15px 28px; border-radius: 999px; border: 0;
+      text-decoration: none; cursor: pointer;
+      transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+    }
+    .btn svg { width: 18px; height: 18px; }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-star { background: var(--star); color: var(--navy); box-shadow: 0 6px 18px rgba(247, 207, 60, .45); }
+    .btn-star:hover { box-shadow: 0 10px 26px rgba(247, 207, 60, .6); }
+    .btn-navy { background: var(--navy); color: var(--white); box-shadow: 0 6px 18px rgba(28, 42, 99, .3); }
+    .btn-navy:hover { background: var(--navy-deep); }
+    .btn-ghost { background: transparent; color: var(--white); box-shadow: inset 0 0 0 2px rgba(255,255,255,.5); }
+    .btn-ghost:hover { box-shadow: inset 0 0 0 2px var(--white); }
+
+    /* ---------- Top bar ---------- */
+    .topbar { background: var(--navy); color: #dfe5fb; font-size: .88rem; }
+    .topbar .wrap { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding-top: 9px; padding-bottom: 9px; }
+    .topbar a { text-decoration: none; display: inline-flex; align-items: center; gap: 7px; }
+    .topbar a:hover { color: var(--star); }
+    .topbar svg { width: 15px; height: 15px; fill: currentColor; }
+    .topbar-links { display: flex; gap: 22px; flex-wrap: wrap; }
+
+    /* ---------- Header ---------- */
+    .header {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(255, 255, 255, .88);
+      backdrop-filter: saturate(160%) blur(14px);
+      -webkit-backdrop-filter: saturate(160%) blur(14px);
+      border-bottom: 1px solid transparent;
+      transition: border-color .3s, box-shadow .3s;
+    }
+    .header.scrolled { border-color: rgba(28,42,99,.08); box-shadow: var(--shadow-sm); }
+    .header .wrap { display: flex; align-items: center; justify-content: space-between; height: 78px; }
+    .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+    .brand img { width: 54px; height: 54px; border-radius: 50%; }
+    .brand-name { font-family: "Fraunces", serif; font-weight: 800; color: var(--navy); font-size: 1.15rem; line-height: 1; }
+    .brand-name .script { display: block; font-size: 1.25rem; color: var(--navy); opacity: .8; margin-top: 2px; }
+    .nav { display: flex; align-items: center; gap: 30px; }
+    .nav a:not(.btn) { text-decoration: none; font-weight: 700; color: var(--navy); font-size: .97rem; position: relative; }
+    .nav a:not(.btn)::after {
+      content: ""; position: absolute; left: 0; right: 0; bottom: -6px; height: 3px; border-radius: 3px;
+      background: var(--star); transform: scaleX(0); transition: transform .25s ease;
+    }
+    .nav a:not(.btn):hover::after { transform: scaleX(1); }
+    .nav .btn { padding: 11px 22px; }
+    .menu-toggle { display: none; background: none; border: 0; padding: 8px; cursor: pointer; color: var(--navy); }
+    .menu-toggle svg { width: 28px; height: 28px; }
+
+    /* ---------- Hero ---------- */
+    .hero {
+      position: relative; overflow: hidden;
+      background: radial-gradient(ellipse at 50% 0%, #ffffff 0%, var(--sky) 55%, var(--sky-deep) 100%);
+      padding: 36px 0 0;
+    }
+    .twinkle { position: absolute; fill: var(--star); opacity: .0; animation: twinkle 4s ease-in-out infinite; pointer-events: none; }
+    .twinkle.navy { fill: var(--navy); }
+    @keyframes twinkle { 0%, 100% { opacity: 0; transform: scale(.6) rotate(0); } 50% { opacity: .9; transform: scale(1) rotate(20deg); } }
+    .banner-card {
+      position: relative; max-width: 980px; margin: 0 auto;
+      border-radius: 28px; overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      background: #f8f9fd;
+      animation: rise .9s cubic-bezier(.2,.8,.2,1) both;
+    }
+    .banner-card img { width: 100%; height: auto; }
+    @keyframes rise { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+    .hero-copy { text-align: center; padding: 64px 0 130px; position: relative; z-index: 2; animation: rise .9s .15s cubic-bezier(.2,.8,.2,1) both; }
+    .hero-copy h1 { font-size: clamp(1.7rem, 3.4vw, 2.5rem); font-weight: 800; max-width: 820px; margin: 0 auto; }
+    .hero-copy p { color: var(--muted); font-size: 1.12rem; margin: 14px auto 0; max-width: 640px; }
+
+    /* Action buttons */
+    .actions {
+      display: grid; grid-template-columns: repeat(5, 1fr); gap: 18px;
+      max-width: 1100px; margin: -60px auto 0; position: relative; z-index: 2;
+      animation: rise .9s .3s cubic-bezier(.2,.8,.2,1) both;
+    }
+    .action {
+      display: flex; flex-direction: column; align-items: center; text-align: center; gap: 12px;
+      background: var(--white); border-radius: var(--radius);
+      padding: 28px 16px 24px; text-decoration: none;
+      box-shadow: var(--shadow);
+      transition: transform .25s ease, box-shadow .25s ease;
+      position: relative; overflow: hidden;
+    }
+    .action::before {
+      content: ""; position: absolute; inset: auto 0 0 0; height: 4px; background: var(--star);
+      transform: scaleX(0); transition: transform .3s ease;
+    }
+    .action:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+    .action:hover::before { transform: scaleX(1); }
+    .action-icon {
+      width: 60px; height: 60px; border-radius: 18px;
+      display: grid; place-items: center;
+      background: var(--sky); color: var(--navy);
+      transition: background .25s, color .25s, transform .25s;
+    }
+    .action:hover .action-icon { background: var(--navy); color: var(--star); transform: rotate(-6deg); }
+    .action-icon svg { width: 28px; height: 28px; }
+    .action strong { font-family: "Fraunces", serif; font-weight: 600; font-size: 1.12rem; color: var(--navy); line-height: 1.2; }
+    .action span { font-size: .88rem; color: var(--muted); line-height: 1.4; }
+    .action.featured { background: var(--navy); }
+    .action.featured strong { color: var(--white); }
+    .action.featured span { color: #c9d1f0; }
+    .action.featured .action-icon { background: var(--star); color: var(--navy); }
+    .action.featured:hover .action-icon { background: var(--white); }
+
+    .clouds { position: absolute; left: 0; right: 0; bottom: -1px; height: 120px; z-index: 1; }
+
+    /* ---------- Impact strip ---------- */
+    .impact { background: var(--white); padding: 40px 0 0; }
+    .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; text-align: center; }
+    .stat { padding: 18px 10px; }
+    .stat b { display: block; font-family: "Fraunces", serif; font-weight: 800; font-size: clamp(2.2rem, 4vw, 3rem); color: var(--navy); line-height: 1; }
+    .stat b .accent { color: var(--star); }
+    .stat > span { display: block; margin-top: 10px; color: var(--muted); font-weight: 600; font-size: .95rem; }
+
+    /* ---------- Mission ---------- */
+    .mission-grid { display: grid; grid-template-columns: 1.05fr 1fr; gap: 72px; align-items: center; }
+    .mission-photo { position: relative; }
+    .mission-photo img { border-radius: 28px; box-shadow: var(--shadow-lg); aspect-ratio: 4/3; object-fit: cover; width: 100%; }
+    .mission-badge {
+      position: absolute; right: -22px; bottom: -26px;
+      background: var(--star); color: var(--navy);
+      border-radius: 50%; width: 132px; height: 132px;
+      display: grid; place-items: center; text-align: center;
+      font-family: "Fraunces", serif; font-weight: 800; line-height: 1.05;
+      box-shadow: var(--shadow); transform: rotate(-8deg);
+    }
+    .mission-badge small { display: block; font-family: "Nunito", sans-serif; font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; font-weight: 800; }
+    .mission-badge big { font-size: 2rem; display: block; }
+    .mission-copy p { color: var(--muted); font-size: 1.1rem; margin-top: 18px; }
+    .mission-copy .btn { margin-top: 30px; }
+
+    /* ---------- Gallery ---------- */
+    .gallery-section { background: var(--cream); }
+    .gallery { columns: 3; column-gap: 18px; }
+    .gallery figure {
+      margin: 0 0 18px; position: relative; border-radius: var(--radius); overflow: hidden;
+      box-shadow: var(--shadow-sm); break-inside: avoid; transform: translateZ(0);
+    }
+    .gallery img { width: 100%; height: auto; transition: transform .6s ease; }
+    .gallery figure:hover img { transform: scale(1.05); }
+    .gallery figcaption {
+      position: absolute; left: 0; right: 0; bottom: 0;
+      padding: 40px 20px 18px; color: var(--white); font-weight: 700; font-size: .95rem; line-height: 1.35;
+      background: linear-gradient(to top, rgba(18, 28, 71, .85), transparent);
+      opacity: .95; transition: opacity .3s;
+    }
+
+    /* ---------- Stay in touch (Newsletter + Mailing list) ---------- */
+    .duo { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; }
+    .panel {
+      border-radius: 28px; padding: 46px; position: relative; overflow: hidden;
+      display: flex; flex-direction: column; gap: 16px;
+    }
+    .panel p { color: var(--muted); }
+    .panel .btn { align-self: flex-start; margin-top: 8px; }
+    .panel-light { background: var(--sky); }
+    .panel-dark { background: var(--navy); color: var(--white); }
+    .panel-dark h3 { color: var(--white); }
+    .panel-dark p { color: #c9d1f0; }
+    .panel-star { position: absolute; right: -30px; top: -30px; width: 160px; height: 160px; fill: var(--star); opacity: .14; }
+    .panel h3 { font-size: 1.75rem; font-weight: 800; display: flex; align-items: center; flex-wrap: wrap; gap: 8px 12px; }
+    .soon {
+      display: inline-block; font: 800 .72rem "Nunito", sans-serif; letter-spacing: .12em; text-transform: uppercase;
+      padding: 6px 12px; border-radius: 999px; background: var(--star); color: var(--navy);
+    }
+    .panel-light .soon { background: var(--navy); color: var(--star); }
+    .action .soon { font-size: .62rem; padding: 3px 9px; margin-top: -2px; }
+    .action.soon-card .action-icon { opacity: .8; }
+
+    /* ---------- Donate ---------- */
+    .donate {
+      position: relative; overflow: hidden; color: var(--white);
+      background: linear-gradient(135deg, var(--navy) 0%, #2a3d8a 100%);
+    }
+    .donate-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 60px; align-items: center; }
+    .donate h2 { color: var(--white); }
+    .donate h2 .script { font-size: 1.2em; }
+    .donate p { color: #d3daf5; font-size: 1.12rem; margin-top: 18px; }
+    .donate .eyebrow { color: var(--star); opacity: 1; }
+    .donate-actions { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 24px; }
+    .give { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 30px; }
+    .give-card {
+      display: flex; align-items: center; gap: 14px;
+      background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.14);
+      border-radius: 18px; padding: 16px 16px 16px 18px;
+      transition: background .2s, border-color .2s;
+    }
+    .give-card:hover { background: rgba(255,255,255,.12); border-color: rgba(255,255,255,.25); }
+    .give-badge {
+      width: 46px; height: 46px; border-radius: 13px; flex: none;
+      display: grid; place-items: center;
+      font: 800 1.35rem "Nunito", sans-serif; color: var(--white);
+    }
+    .give-badge.zelle { background: #6d1ed4; }
+    .give-badge.cashapp { background: #00c244; }
+    .give-info { flex: 1; min-width: 0; line-height: 1.3; }
+    .give-info small { display: block; font-size: .75rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: #b9c3ea; }
+    .give-info b { display: block; color: var(--white); font-size: 1.05rem; overflow-wrap: anywhere; }
+    .copy-btn {
+      flex: none; font: 800 .85rem "Nunito", sans-serif; cursor: pointer;
+      background: var(--star); color: var(--navy); border: 0; border-radius: 999px;
+      padding: 9px 16px; transition: transform .15s, background .2s;
+    }
+    .copy-btn:hover { transform: translateY(-1px); }
+    .copy-btn.copied { background: #8be0a4; }
+    @media (max-width: 560px) { .give { grid-template-columns: 1fr; } }
+    .donate-photo img { border-radius: 28px; aspect-ratio: 4/3; object-fit: cover; box-shadow: 0 30px 60px rgba(0,0,0,.3); border: 6px solid rgba(255,255,255,.12); }
+    .donate .bg-star { position: absolute; fill: var(--star); opacity: .07; }
+    .tax-note { display: inline-flex; align-items: center; gap: 8px; margin-top: 22px; font-size: .9rem; color: #b9c3ea; }
+    .tax-note svg { width: 18px; height: 18px; fill: var(--star); flex: none; }
+
+    /* ---------- Get involved ---------- */
+    .ways { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .way {
+      background: var(--white); border: 1px solid rgba(28,42,99,.08); border-radius: var(--radius);
+      padding: 36px 30px; display: flex; flex-direction: column; gap: 14px;
+      transition: transform .25s, box-shadow .25s, border-color .25s;
+    }
+    .way:hover { transform: translateY(-4px); box-shadow: var(--shadow); border-color: transparent; }
+    .way .action-icon { width: 54px; height: 54px; }
+    .way p { color: var(--muted); flex: 1; }
+    .way a.link { font-weight: 800; color: var(--navy); text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
+    .way a.link svg { width: 16px; height: 16px; transition: transform .2s; }
+    .way a.link:hover svg { transform: translateX(4px); }
+
+    /* ---------- Events ---------- */
+    .events-section { background: var(--sky); }
+    .event {
+      display: grid; grid-template-columns: 1fr 1.15fr; background: var(--white);
+      border-radius: 32px; overflow: hidden; box-shadow: var(--shadow-lg);
+    }
+    .event-photo { position: relative; min-height: 420px; }
+    .event-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 30%; }
+    .event-date {
+      position: absolute; top: 22px; left: 22px;
+      width: 92px; padding: 12px 0 10px; border-radius: 20px; text-align: center;
+      background: var(--white); box-shadow: var(--shadow); line-height: 1;
+      display: flex; flex-direction: column; gap: 4px;
+    }
+    .event-date .m { font-weight: 800; font-size: .8rem; letter-spacing: .16em; text-transform: uppercase; color: #c8102e; }
+    .event-date .d { font-family: "Fraunces", serif; font-weight: 800; font-size: 2.6rem; color: var(--navy); }
+    .event-date .w { font-weight: 700; font-size: .75rem; color: var(--muted); }
+    .event-countdown {
+      position: absolute; left: 22px; bottom: 22px;
+      background: var(--navy); color: var(--star); font-weight: 800; font-size: .9rem;
+      padding: 9px 16px; border-radius: 999px; box-shadow: var(--shadow);
+    }
+    .event-body { padding: 48px 52px; display: flex; flex-direction: column; gap: 16px; }
+    .event-tags { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+    .event-annual { font-weight: 800; font-size: .8rem; letter-spacing: .12em; text-transform: uppercase; color: #c8102e; }
+    .event-body h3 { font-size: clamp(1.8rem, 3vw, 2.4rem); font-weight: 800; }
+    .event-body > p { color: var(--muted); font-size: 1.05rem; }
+    .event-meta { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+    .event-meta li { display: flex; gap: 12px; align-items: flex-start; color: var(--ink); line-height: 1.45; }
+    .event-meta svg { width: 22px; height: 22px; flex: none; color: var(--navy); margin-top: 1px; }
+    .event-meta b { color: var(--navy); }
+    .event-fun { list-style: none; margin: 4px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+    .event-fun li {
+      background: var(--cream); border: 1px solid rgba(28,42,99,.08);
+      padding: 7px 14px; border-radius: 999px; font-weight: 700; font-size: .9rem; color: var(--navy);
+    }
+    .event-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; }
+    .btn-outline { background: transparent; color: var(--navy); box-shadow: inset 0 0 0 2px rgba(28,42,99,.2); }
+    .btn-outline:hover { box-shadow: inset 0 0 0 2px var(--navy); }
+    .more-events {
+      margin-top: 26px; padding: 22px 28px; border-radius: 22px;
+      background: rgba(255,255,255,.65); display: flex; align-items: center; justify-content: space-between; gap: 18px; flex-wrap: wrap;
+    }
+    .more-events p { color: var(--muted); }
+    .more-events b { color: var(--navy); }
+
+    /* ---------- Contact ---------- */
+    .contact-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+    .contact-item {
+      display: flex; flex-direction: column; align-items: center; text-align: center; gap: 10px;
+      padding: 34px 20px; border-radius: var(--radius); background: var(--cream);
+      text-decoration: none; transition: transform .25s, box-shadow .25s;
+    }
+    a.contact-item:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+    .contact-item .action-icon { background: var(--star); }
+    .contact-item small { font-weight: 800; letter-spacing: .12em; text-transform: uppercase; font-size: .75rem; color: var(--muted); }
+    .contact-item b { color: var(--navy); font-size: 1.05rem; word-break: break-word; }
+
+    /* ---------- Footer ---------- */
+    .footer { background: var(--navy-deep); color: #b9c3ea; padding: 64px 0 34px; font-size: .95rem; }
+    .footer-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 40px; flex-wrap: wrap; padding-bottom: 36px; border-bottom: 1px solid rgba(255,255,255,.1); }
+    .footer .brand-name { color: var(--white); }
+    .footer .brand-name .script { color: var(--star); opacity: 1; }
+    .footer-tag { max-width: 360px; margin-top: 16px; }
+    .footer-links { display: flex; gap: 56px; flex-wrap: wrap; }
+    .footer-links h4 { color: var(--white); margin: 0 0 14px; font-size: .8rem; letter-spacing: .14em; text-transform: uppercase; }
+    .footer-links a { display: block; text-decoration: none; padding: 4px 0; }
+    .footer-links a:hover { color: var(--star); }
+    .footer-bottom { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; padding-top: 26px; font-size: .85rem; }
+
+    /* ---------- Reveal on scroll ---------- */
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity .8s ease, transform .8s cubic-bezier(.2,.8,.2,1); }
+    .reveal.in { opacity: 1; transform: none; }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 1040px) {
+      .actions { display: flex; flex-wrap: wrap; justify-content: center; }
+      .actions .action { flex: 0 1 calc((100% - 36px) / 3); }
+      .mission-grid, .donate-grid { grid-template-columns: 1fr; gap: 56px; }
+      .mission-badge { right: 16px; }
+      .contact-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 860px) {
+      .nav {
+        position: absolute; top: 78px; left: 0; right: 0;
+        flex-direction: column; align-items: stretch; gap: 0;
+        background: var(--white); box-shadow: var(--shadow);
+        padding: 8px 24px 24px;
+        display: none;
+      }
+      .nav.open { display: flex; }
+      .nav a:not(.btn) { padding: 14px 0; border-bottom: 1px solid rgba(28,42,99,.08); }
+      .nav a:not(.btn)::after { display: none; }
+      .nav .btn { margin-top: 16px; }
+      .menu-toggle { display: block; }
+      .duo, .ways, .event { grid-template-columns: 1fr; }
+      .event-photo { min-height: 300px; }
+      .event-body { padding: 32px 26px; }
+      .events-body, .panel { padding: 36px 28px; }
+      .stats { grid-template-columns: repeat(2, 1fr); }
+      .gallery { columns: 2; column-gap: 12px; }
+      .gallery figure { margin-bottom: 12px; border-radius: 16px; }
+      .gallery figcaption { font-size: .82rem; padding: 32px 12px 10px; }
+      .section { padding: 80px 0; }
+    }
+    @media (max-width: 560px) {
+      body { font-size: 16px; }
+      .wrap { padding: 0 16px; }
+      .topbar .loc { display: none; }
+      .topbar-links { gap: 16px; }
+      .actions { gap: 12px; }
+      .actions .action { flex: 0 1 calc((100% - 12px) / 2); }
+      .actions .action:last-child { flex-basis: 100%; }
+      .action { padding: 22px 12px 20px; }
+      .hero { padding-top: 20px; }
+      .actions { margin-top: -20px; }
+      .hero-copy { padding: 44px 0 100px; }
+      .banner-card { border-radius: 18px; }
+      .brand-name { font-size: 1rem; }
+      .brand img { width: 46px; height: 46px; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .mission-badge { width: 108px; height: 108px; }
+      .mission-badge big { font-size: 1.6rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Reusable icons -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5L2.5 9.4l6.6-.9z"/></symbol>
+      <symbol id="i-phone" viewBox="0 0 24 24"><path d="M6.6 10.8a15.1 15.1 0 006.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 013 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"/></symbol>
+      <symbol id="i-mail" viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2zm0 4l-8 5-8-5V6l8 5 8-5z"/></symbol>
+      <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 2a7 7 0 00-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 00-7-7zm0 9.5A2.5 2.5 0 1112 6a2.5 2.5 0 010 5.5z"/></symbol>
+      <symbol id="i-fb" viewBox="0 0 24 24"><path d="M22 12a10 10 0 10-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.3c-1.2 0-1.6.8-1.6 1.6V12h2.8l-.4 2.9h-2.3v7A10 10 0 0022 12z"/></symbol>
+      <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+      <symbol id="i-news" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h13v14H6a2 2 0 01-2-2z"/><path d="M17 9h3v8a2 2 0 01-2 2"/><path d="M7.5 9h6M7.5 12.5h6M7.5 16h4"/></symbol>
+      <symbol id="i-envelope" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3.5 7l8.5 6 8.5-6"/></symbol>
+      <symbol id="i-heart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7.5-4.6-9.2-9.4C1.7 7.4 3.8 4.5 7 4.5c2 0 3.4 1.1 5 3 1.6-1.9 3-3 5-3 3.2 0 5.3 2.9 4.2 6.1C19.5 15.4 12 20 12 20z"/></symbol>
+      <symbol id="i-hands" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="7" r="3"/><circle cx="16.5" cy="8" r="2.5"/><path d="M2.5 20c.4-3.6 2.7-6 5.5-6s5.1 2.4 5.5 6"/><path d="M14 14.6c.8-.4 1.6-.6 2.5-.6 2.5 0 4.5 2.2 5 5.5"/></symbol>
+      <symbol id="i-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2.5"/><path d="M3 10h18M8 3v4M16 3v4"/><path d="M12 13.2l1 2 2.2.3-1.6 1.5.4 2.2-2-1-2 1 .4-2.2-1.6-1.5 2.2-.3z" fill="currentColor" stroke="none"/></symbol>
+      <symbol id="i-gift" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M5 12v8h14v-8M12 8v12"/><path d="M12 8S10.5 3.5 8 4.2C6 4.8 7 8 12 8zM12 8s1.5-4.5 4-3.8C18 4.8 17 8 12 8z"/></symbol>
+      <symbol id="i-handshake" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12l4-4 4 1 3-2 3 1 4 4"/><path d="M6 8v6l5 5c.8.8 2 .8 2.8 0l4.2-4.2"/><path d="M10 13l2 2M12 11l3 3"/></symbol>
+      <symbol id="i-child" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="6" r="3"/><path d="M12 9v6M8 12h8M9.5 21l2.5-6 2.5 6"/></symbol>
+      <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 2l8 3v6c0 5-3.4 9.4-8 11-4.6-1.6-8-6-8-11V5zm-1.2 13.6l6-6-1.4-1.4-4.6 4.6-2.2-2.2-1.4 1.4z"/></symbol>
+    </defs>
+  </svg>
+
+  <!-- Top bar -->
+  <div class="topbar">
+    <div class="wrap">
+      <div class="topbar-links">
+        <a href="tel:+19155327908"><svg><use href="#i-phone"/></svg>(915) 532-7908</a>
+        <a href="mailto:contact@reachforastarep.org"><svg><use href="#i-mail"/></svg>contact@reachforastarep.org</a>
+      </div>
+      <div class="topbar-links">
+        <span class="loc" style="display:inline-flex;align-items:center;gap:7px"><svg><use href="#i-pin"/></svg>El Paso, Texas</span>
+        <a href="https://www.facebook.com/elpasoreachforastar" target="_blank" rel="noopener" aria-label="Facebook"><svg><use href="#i-fb"/></svg>Facebook</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="header" id="header">
+    <div class="wrap">
+      <a class="brand" href="#top" aria-label="Reach for a Star El Paso, home">
+        <img src="images/logo.jpg" alt="">
+        <span class="brand-name">Reach for a Star<span class="script">El Paso</span></span>
+      </a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+      <nav class="nav" id="nav">
+        <a href="#about">About</a>
+        <a href="#stay-in-touch">Newsletter</a>
+        <a href="#get-involved">Get Involved</a>
+        <a href="#events">Events</a>
+        <a href="#contact">Contact</a>
+        <a class="btn btn-star" href="#donate"><svg><use href="#i-heart"/></svg>Donate</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <!-- Hero -->
+    <section class="hero">
+      <svg class="twinkle" style="top:9%;left:6%;width:22px;animation-delay:.2s"><use href="#i-star"/></svg>
+      <svg class="twinkle navy" style="top:22%;left:2.5%;width:14px;animation-delay:1.4s"><use href="#i-star"/></svg>
+      <svg class="twinkle" style="top:6%;right:8%;width:18px;animation-delay:2.1s"><use href="#i-star"/></svg>
+      <svg class="twinkle navy" style="top:30%;right:3%;width:16px;animation-delay:.8s"><use href="#i-star"/></svg>
+      <svg class="twinkle" style="top:48%;left:4%;width:12px;animation-delay:2.8s"><use href="#i-star"/></svg>
+      <svg class="twinkle" style="top:52%;right:5%;width:20px;animation-delay:3.3s"><use href="#i-star"/></svg>
+
+      <div class="wrap">
+        <div class="banner-card">
+          <img src="images/banner.jpg" width="1206" height="512"
+               alt="Reach for a Star El Paso. Inspiring dreams. Encouraging hope. Empowering brighter tomorrows.">
+        </div>
+
+        <nav class="actions" aria-label="Quick links">
+          <a class="action" href="#stay-in-touch">
+            <div class="action-icon"><svg><use href="#i-news"/></svg></div>
+            <strong>Newsletter</strong>
+            <span class="soon">Coming soon</span>
+          </a>
+          <a class="action" href="#mailing-list">
+            <div class="action-icon"><svg><use href="#i-envelope"/></svg></div>
+            <strong>Mailing List</strong>
+            <span class="soon">Coming soon</span>
+          </a>
+          <a class="action featured" href="#donate">
+            <div class="action-icon"><svg><use href="#i-heart"/></svg></div>
+            <strong>Donate</strong>
+            <span>Make a wish come true</span>
+          </a>
+          <a class="action" href="#get-involved">
+            <div class="action-icon"><svg><use href="#i-hands"/></svg></div>
+            <strong>Get Involved</strong>
+            <span>Volunteer &amp; partner</span>
+          </a>
+          <a class="action" href="#events">
+            <div class="action-icon"><svg><use href="#i-calendar"/></svg></div>
+            <strong>Upcoming Events</strong>
+            <span>Christmas Party · Dec 21</span>
+          </a>
+        </nav>
+
+        <div class="hero-copy">
+          <h1>Granting wishes to critically ill children across West Texas &amp; Southern New Mexico since 1982.</h1>
+          <p>For more than four decades, our El Paso community has come together to bring joy, hope and unforgettable moments to kids facing the toughest fights.</p>
+        </div>
+      </div>
+
+      <svg class="clouds" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
+        <path fill="#ffffff" d="M0 70c60-30 120-30 180 0 40-40 110-46 160-6 50-30 120-28 160 10 50-36 130-36 180 4 46-30 116-30 160 4 50-40 130-44 190-4 40-26 100-28 150 4 60-30 110-26 160 4V120H0z"/>
+      </svg>
+    </section>
+
+    <!-- Impact -->
+    <section class="impact" aria-label="Our impact">
+      <div class="wrap">
+        <div class="stats reveal">
+          <div class="stat"><b>1982</b><span>Granting wishes since</span></div>
+          <div class="stat"><b><span id="years">40</span><span class="accent">+</span></b><span>Years of service</span></div>
+          <div class="stat"><b>2</b><span>States served: Texas &amp; New Mexico</span></div>
+          <div class="stat"><b>100<span class="accent">%</span></b><span>Of reviewers recommend us</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section class="section" id="about">
+      <div class="wrap mission-grid">
+        <div class="mission-photo reveal">
+          <img src="images/hugs.jpg" alt="A Reach for a Star supporter hugging a smiling girl wearing a sash" style="object-position:center 30%" loading="lazy">
+          <div class="mission-badge"><div><small>Est.</small><big>1982</big><small>El Paso</small></div></div>
+        </div>
+        <div class="mission-copy reveal">
+          <div class="eyebrow"><svg><use href="#i-star"/></svg>Our mission</div>
+          <h2>Every child deserves a reason to <span class="script" style="font-size:1.15em">smile</span></h2>
+          <p>Reach for a Star El Paso grants wishes to critically ill children throughout West Texas and Southern New Mexico. A wish can't cure an illness, but it can bring a family together, lift a child's spirits and give them something wonderful to look forward to.</p>
+          <p>We're a local 501(c)(3) nonprofit, supported by neighbors, businesses and first responders who believe in the power of hope.</p>
+          <a class="btn btn-navy" href="#get-involved">Join our mission <svg><use href="#i-arrow"/></svg></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery -->
+    <section class="section gallery-section" aria-labelledby="moments-title">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div class="eyebrow"><svg><use href="#i-star"/></svg>Moments of joy</div>
+          <h2 id="moments-title">Wishes, granted with love</h2>
+          <p>Every wish is made possible by a community that shows up: volunteers, local businesses, first responders and friends.</p>
+        </div>
+        <div class="gallery reveal">
+          <figure><img src="images/police.jpg" width="1374" height="1145" alt="A wish recipient holding a sign for Karol G, surrounded by police officers and supporters" loading="lazy"><figcaption>A concert wish, cheered on by local officers</figcaption></figure>
+          <figure><img src="images/outdoors.jpg" width="1050" height="1400" alt="A smiling boy wearing a sash and holding a balloon, with two Reach for a Star supporters" loading="lazy"><figcaption>Celebrating a brave young star</figcaption></figure>
+          <figure><img src="images/lucha.jpg" width="1333" height="1400" alt="Supporters posing in a wrestling ring with masked luchadores and championship belts at Three Missions Brewery" loading="lazy"><figcaption>Lucha libre fun with masked wrestlers at Three Missions Brewery</figcaption></figure>
+          <figure><img src="images/magician.jpg" width="1050" height="1400" alt="A magician performing for a crowd of kids and families at the Reach for a Star Easter party" loading="lazy"><figcaption>A magic show at our Easter party</figcaption></figure>
+          <figure><img src="images/under-bridge.jpg" width="1400" height="1050" alt="Members of Twin City Offroad in matching shirts gathered beneath colorful freeway murals" loading="lazy"><figcaption>Twin City Offroad helps grant a wish</figcaption></figure>
+          <figure><img src="images/ice-cream.jpg" width="1400" height="1050" alt="Abundant Home Health team members with a birthday party set up in a hospital playroom" loading="lazy"><figcaption>A birthday wish at the hospital with Abundant Home Health</figcaption></figure>
+          <figure><img src="images/target-2.jpg" width="1050" height="1400" alt="A teen holding a bouquet and gifts, with two Target team members" loading="lazy"><figcaption>Flowers, gifts and a day to remember</figcaption></figure>
+          <figure><img src="images/shed.jpg" width="1050" height="1400" alt="Tuff Shed El Paso team members and a family in front of a newly built, mural-painted shed" loading="lazy"><figcaption>A backyard wish, sponsored by Tuff Shed El Paso</figcaption></figure>
+          <figure><img src="images/balloons.jpg" width="1050" height="1400" alt="Volunteers in Reach for a Star shirts in front of a balloon arch" loading="lazy"><figcaption>Our team, ready to make wishes happen</figcaption></figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- Newsletter + Mailing list -->
+    <section class="section" id="stay-in-touch">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div class="eyebrow"><svg><use href="#i-star"/></svg>Stay in touch</div>
+          <h2>Be part of every wish</h2>
+          <p>Wish stories, event invitations and ways to help, coming soon to your inbox.</p>
+        </div>
+        <div class="duo">
+          <div class="panel panel-light reveal">
+            <svg class="panel-star"><use href="#i-star"/></svg>
+            <div class="action-icon" style="background:var(--white)"><svg><use href="#i-news"/></svg></div>
+            <h3>Our Newsletter <span class="soon">Coming soon</span></h3>
+            <p>Wish stories, thank-yous to our sponsors and news from the Reach for a Star family. Our first issue is on its way!</p>
+            <a class="btn btn-navy" href="https://www.facebook.com/elpasoreachforastar" target="_blank" rel="noopener"><svg style="fill:currentColor"><use href="#i-fb"/></svg>Follow us for updates</a>
+          </div>
+          <div class="panel panel-dark reveal" id="mailing-list">
+            <svg class="panel-star"><use href="#i-star"/></svg>
+            <div class="action-icon" style="background:var(--star)"><svg><use href="#i-envelope"/></svg></div>
+            <h3>Join the Mailing List <span class="soon">Coming soon</span></h3>
+            <p>Soon you'll be able to sign up to hear about upcoming events, volunteer opportunities and wishes in need of a sponsor.</p>
+            <a class="btn btn-star" href="mailto:contact@reachforastarep.org?subject=Please%20keep%20me%20posted">Email us to stay posted <svg><use href="#i-arrow"/></svg></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Donate -->
+    <section class="section donate" id="donate">
+      <svg class="bg-star" style="width:420px;height:420px;right:-120px;top:-120px"><use href="#i-star"/></svg>
+      <svg class="bg-star" style="width:220px;height:220px;left:-60px;bottom:-60px"><use href="#i-star"/></svg>
+      <div class="wrap donate-grid">
+        <div class="reveal">
+          <div class="eyebrow"><svg><use href="#i-star"/></svg>Donate</div>
+          <h2>Help a child <span class="script">reach for a star</span></h2>
+          <p>Your gift turns a child's biggest dream into a real, unforgettable day, right here in our own community.</p>
+          <div class="give">
+            <div class="give-card">
+              <div class="give-badge zelle" aria-hidden="true">Z</div>
+              <div class="give-info">
+                <small>Zelle</small>
+                <b>(915) 532-7908</b>
+              </div>
+              <button class="copy-btn" type="button" data-copy="9155327908" aria-label="Copy Zelle number">Copy</button>
+            </div>
+            <div class="give-card">
+              <div class="give-badge cashapp" aria-hidden="true">$</div>
+              <div class="give-info">
+                <small>Cash App</small>
+                <b>$reachforastarelpaso</b>
+              </div>
+              <button class="copy-btn" type="button" data-copy="$reachforastarelpaso" aria-label="Copy Cash App tag">Copy</button>
+            </div>
+          </div>
+          <div class="donate-actions">
+            <a class="btn btn-star" href="https://cash.app/$reachforastarelpaso" target="_blank" rel="noopener"><svg><use href="#i-heart"/></svg>Give with Cash App</a>
+            <a class="btn btn-ghost" href="mailto:contact@reachforastarep.org?subject=Sponsoring%20a%20wish">Sponsor a wish</a>
+          </div>
+          <div class="tax-note"><svg><use href="#i-shield"/></svg>Reach for a Star El Paso is a 501(c)(3) nonprofit. Donations are tax-deductible as allowed by law.</div>
+        </div>
+        <div class="donate-photo reveal">
+          <img src="images/target.jpg" alt="A wish celebration at Target with the Bullseye mascot statue, family and community partners" loading="lazy">
+        </div>
+      </div>
+    </section>
+
+    <!-- Get involved -->
+    <section class="section" id="get-involved">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div class="eyebrow"><svg><use href="#i-star"/></svg>Get involved</div>
+          <h2>There's a place for you here</h2>
+          <p>Whether you have an hour, a skill or a business that wants to give back, you can help make wishes happen.</p>
+        </div>
+        <div class="ways">
+          <div class="way reveal">
+            <div class="action-icon"><svg><use href="#i-hands"/></svg></div>
+            <h3>Volunteer</h3>
+            <p>Help at wish celebrations, community events and fundraisers. No experience needed, just a big heart.</p>
+            <a class="link" href="mailto:contact@reachforastarep.org?subject=I%27d%20like%20to%20volunteer&amp;body=Hi%20Reach%20for%20a%20Star%2C%0A%0AI%27d%20love%20to%20volunteer%20with%20your%20organization.%0A%0AName%3A%20%0APhone%3A%20%0AHow%20I%27d%20like%20to%20help%3A%20%0A%0AThank%20you%21">Become a volunteer <svg><use href="#i-arrow"/></svg></a>
+          </div>
+          <div class="way reveal">
+            <div class="action-icon"><svg><use href="#i-handshake"/></svg></div>
+            <h3>Partner with us</h3>
+            <p>Local businesses and organizations help make wishes possible through sponsorships, donations and in-kind gifts.</p>
+            <a class="link" href="mailto:contact@reachforastarep.org?subject=Partnership%20inquiry&amp;body=Hi%20Reach%20for%20a%20Star%2C%0A%0AWe%27re%20interested%20in%20partnering%20with%20you%20to%20help%20grant%20wishes.%0A%0AName%3A%20%0ABusiness%20or%20organization%3A%20%0APhone%3A%20%0AHow%20we%27d%20like%20to%20help%3A%20%0A%0AThank%20you%21">Become a partner <svg><use href="#i-arrow"/></svg></a>
+          </div>
+          <div class="way reveal">
+            <div class="action-icon"><svg><use href="#i-child"/></svg></div>
+            <h3>Refer a child</h3>
+            <p>Know a critically ill child in West Texas or Southern New Mexico? Reach out and we'll walk you through the process.</p>
+            <a class="link" href="mailto:contact@reachforastarep.org?subject=Wish%20referral&amp;body=Hi%20Reach%20for%20a%20Star%2C%0A%0AI%27d%20like%20to%20refer%20a%20child%20for%20a%20wish.%0A%0AMy%20name%3A%20%0AMy%20phone%3A%20%0AMy%20relationship%20to%20the%20child%3A%20%0AChild%27s%20first%20name%20and%20age%3A%20%0ACity%3A%20%0A%0AThank%20you%21">Refer a child <svg><use href="#i-arrow"/></svg></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Events -->
+    <section class="section events-section" id="events">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div class="eyebrow"><svg><use href="#i-calendar"/></svg>Upcoming events</div>
+          <h2>Come celebrate with us</h2>
+          <p>Our events bring the community together to surround kids and families with joy. Here's what's coming up.</p>
+        </div>
+
+        <article class="event reveal" aria-labelledby="xmas-title">
+          <div class="event-photo">
+            <img src="images/christmas.jpg" alt="A child hugging Santa, with Mrs. Claus, an elf and the Grinch at a past Reach for a Star Christmas party" loading="lazy">
+            <div class="event-date" aria-hidden="true">
+              <span class="m">Dec</span><span class="d">21</span><span class="w">Monday</span>
+            </div>
+            <div class="event-countdown" id="xmasCountdown" hidden></div>
+          </div>
+          <div class="event-body">
+            <div class="event-tags">
+              <span class="soon">Coming soon</span>
+              <span class="event-annual">44th Annual Christmas Party</span>
+            </div>
+            <h3 id="xmas-title">Reach For a Star Christmas</h3>
+            <ul class="event-meta">
+              <li><svg><use href="#i-calendar"/></svg><span><b>Monday, December 21, 2026</b><br>11:00 AM – 3:00 PM</span></li>
+              <li><svg style="fill:currentColor;stroke:none"><use href="#i-pin"/></svg><span><b>Casa Ortiz</b><br>10167 Socorro Rd, Socorro, TX 79927</span></li>
+            </ul>
+            <p>Reach for a Star and other local community providers will be providing food and a gift to each child who attends.</p>
+            <ul class="event-fun" aria-label="Event highlights">
+              <li>🎁 A gift for every child</li>
+              <li>🍽️ Food</li>
+              <li>☕ Hot chocolate</li>
+              <li>🍪 Cookies</li>
+              <li>🎅 Pictures with Santa</li>
+              <li>🎯 Game booths</li>
+              <li>❄️ Snow slide</li>
+              <li>✨ And more!</li>
+            </ul>
+            <div class="event-actions">
+              <a class="btn btn-navy" href="events/reach-for-a-star-christmas-2026.ics" download><svg><use href="#i-calendar"/></svg>Add to calendar</a>
+              <a class="btn btn-outline" href="https://www.google.com/maps/search/?api=1&amp;query=Casa+Ortiz+10167+Socorro+Rd+Socorro+TX+79927" target="_blank" rel="noopener"><svg style="fill:currentColor"><use href="#i-pin"/></svg>Get directions</a>
+            </div>
+          </div>
+        </article>
+
+        <div class="more-events reveal">
+          <p><b>More events coming soon.</b> Follow us on Facebook for the latest dates and details.</p>
+          <a class="btn btn-star" href="https://www.facebook.com/elpasoreachforastar" target="_blank" rel="noopener"><svg style="fill:currentColor"><use href="#i-fb"/></svg>Follow on Facebook</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="section" id="contact">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div class="eyebrow"><svg><use href="#i-star"/></svg>Contact us</div>
+          <h2>We'd love to hear from you</h2>
+          <p>Questions about a wish, volunteering or partnering? Reach out anytime.</p>
+        </div>
+        <div class="contact-grid reveal">
+          <a class="contact-item" href="tel:+19155327908">
+            <div class="action-icon"><svg style="fill:currentColor"><use href="#i-phone"/></svg></div>
+            <small>Call</small><b>(915) 532-7908</b>
+          </a>
+          <a class="contact-item" href="mailto:contact@reachforastarep.org">
+            <div class="action-icon"><svg style="fill:currentColor"><use href="#i-mail"/></svg></div>
+            <small>Email</small><b>contact@reachforastarep.org</b>
+          </a>
+          <div class="contact-item">
+            <div class="action-icon"><svg style="fill:currentColor"><use href="#i-pin"/></svg></div>
+            <small>Mailing address</small><b>PO Box 971745<br>El Paso, TX 79997</b>
+          </div>
+          <a class="contact-item" href="https://www.facebook.com/elpasoreachforastar" target="_blank" rel="noopener">
+            <div class="action-icon"><svg style="fill:currentColor"><use href="#i-fb"/></svg></div>
+            <small>Follow</small><b>@elpasoreachforastar</b>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="wrap">
+      <div class="footer-top">
+        <div>
+          <a class="brand" href="#top">
+            <img src="images/logo.jpg" alt="">
+            <span class="brand-name">Reach for a Star<span class="script">El Paso</span></span>
+          </a>
+          <p class="footer-tag">Granting wishes to critically ill children across West Texas &amp; Southern New Mexico since 1982.</p>
+        </div>
+        <div class="footer-links">
+          <div>
+            <h4>Explore</h4>
+            <a href="#about">About</a>
+            <a href="#events">Upcoming Events</a>
+            <a href="#get-involved">Get Involved</a>
+            <a href="#donate">Donate</a>
+          </div>
+          <div>
+            <h4>Stay connected</h4>
+            <a href="#stay-in-touch">Newsletter</a>
+            <a href="#mailing-list">Mailing List</a>
+            <a href="https://www.facebook.com/elpasoreachforastar" target="_blank" rel="noopener">Facebook</a>
+          </div>
+          <div>
+            <h4>Contact</h4>
+            <a href="tel:+19155327908">(915) 532-7908</a>
+            <a href="mailto:contact@reachforastarep.org">contact@reachforastarep.org</a>
+            <span style="display:block;padding:4px 0">PO Box 971745<br>El Paso, TX 79997</span>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; <span id="year">2026</span> Reach for a Star El Paso. All rights reserved.</span>
+        <span>A 501(c)(3) charitable nonprofit organization.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Years of service and copyright year stay current automatically
+    const now = new Date().getFullYear();
+    document.getElementById('years').textContent = now - 1982;
+    document.getElementById('year').textContent = now;
+
+    // Countdown to the Christmas party (hidden once the day has passed)
+    const xmas = new Date(2026, 11, 21);
+    const today = new Date(); today.setHours(0, 0, 0, 0);
+    const daysLeft = Math.round((xmas - today) / 86400000);
+    const countdown = document.getElementById('xmasCountdown');
+    if (daysLeft >= 0) {
+      countdown.textContent = daysLeft === 0 ? '🎄 Today!' : daysLeft === 1 ? '🎄 Tomorrow!' : `🎄 ${daysLeft} days to go`;
+      countdown.hidden = false;
+    }
+
+    // Header shadow on scroll
+    const header = document.getElementById('header');
+    const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 10);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // Mobile menu
+    const toggle = document.getElementById('menuToggle');
+    const nav = document.getElementById('nav');
+    toggle.addEventListener('click', () => {
+      const open = nav.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', open);
+    });
+    nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      nav.classList.remove('open');
+      toggle.setAttribute('aria-expanded', false);
+    }));
+
+    // Reveal sections as they scroll into view
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+    // Copy Zelle number / Cash App tag
+    document.querySelectorAll('.copy-btn').forEach(btn => btn.addEventListener('click', async () => {
+      const text = btn.dataset.copy;
+      try {
+        await navigator.clipboard.writeText(text);
+      } catch {
+        const t = document.createElement('textarea');
+        t.value = text; document.body.appendChild(t); t.select();
+        document.execCommand('copy'); t.remove();
+      }
+      btn.textContent = 'Copied!';
+      btn.classList.add('copied');
+      setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 1800);
+    }));  </script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+# Original full-size photos stay private; the site uses the copies in images/
+/*.jpg
+/*.jpeg
+/*.JPG
+/*.JPEG
+/*.png
+/*.PNG
+/*.heic
+/*.HEIC
+
+# Local preview settings and Mac system files
+.claude/
+.DS_Store
