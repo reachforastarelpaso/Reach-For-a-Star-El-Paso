@@ -332,6 +332,11 @@
     .event-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; }
     .btn-outline { background: transparent; color: var(--navy); box-shadow: inset 0 0 0 2px rgba(28,42,99,.2); }
     .btn-outline:hover { box-shadow: inset 0 0 0 2px var(--navy); }
+    .events-list { display: grid; gap: 28px; }
+    .events-empty {
+      text-align: center; color: var(--muted); font-size: 1.08rem;
+      background: var(--white); border-radius: 24px; padding: 40px 24px; box-shadow: var(--shadow-sm);
+    }
     .more-events {
       margin-top: 26px; padding: 22px 28px; border-radius: 22px;
       background: rgba(255,255,255,.65); display: flex; align-items: center; justify-content: space-between; gap: 18px; flex-wrap: wrap;
@@ -522,7 +527,7 @@
           <a class="action" href="#events">
             <div class="action-icon"><svg><use href="#i-calendar"/></svg></div>
             <strong>Upcoming Events</strong>
-            <span>Christmas Party · Dec 21</span>
+            <span id="nextEventHint">See what's next</span>
           </a>
         </nav>
 
@@ -694,41 +699,9 @@
           <p>Our events bring the community together to surround kids and families with joy. Here's what's coming up.</p>
         </div>
 
-        <article class="event reveal" aria-labelledby="xmas-title">
-          <div class="event-photo">
-            <img src="images/christmas.jpg" alt="A child hugging Santa, with Mrs. Claus, an elf and the Grinch at a past Reach for a Star Christmas party" loading="lazy">
-            <div class="event-date" aria-hidden="true">
-              <span class="m">Dec</span><span class="d">21</span><span class="w">Monday</span>
-            </div>
-            <div class="event-countdown" id="xmasCountdown" hidden></div>
-          </div>
-          <div class="event-body">
-            <div class="event-tags">
-              <span class="soon">Coming soon</span>
-              <span class="event-annual">44th Annual Christmas Party</span>
-            </div>
-            <h3 id="xmas-title">Reach For a Star Christmas</h3>
-            <ul class="event-meta">
-              <li><svg><use href="#i-calendar"/></svg><span><b>Monday, December 21, 2026</b><br>11:00 AM – 3:00 PM</span></li>
-              <li><svg style="fill:currentColor;stroke:none"><use href="#i-pin"/></svg><span><b>Casa Ortiz</b><br>10167 Socorro Rd, Socorro, TX 79927</span></li>
-            </ul>
-            <p>Reach for a Star and other local community providers will be providing food and a gift to each child who attends.</p>
-            <ul class="event-fun" aria-label="Event highlights">
-              <li>🎁 A gift for every child</li>
-              <li>🍽️ Food</li>
-              <li>☕ Hot chocolate</li>
-              <li>🍪 Cookies</li>
-              <li>🎅 Pictures with Santa</li>
-              <li>🎯 Game booths</li>
-              <li>❄️ Snow slide</li>
-              <li>✨ And more!</li>
-            </ul>
-            <div class="event-actions">
-              <a class="btn btn-navy" href="events/reach-for-a-star-christmas-2026.ics" download><svg><use href="#i-calendar"/></svg>Add to calendar</a>
-              <a class="btn btn-outline" href="https://www.google.com/maps/search/?api=1&amp;query=Casa+Ortiz+10167+Socorro+Rd+Socorro+TX+79927" target="_blank" rel="noopener"><svg style="fill:currentColor"><use href="#i-pin"/></svg>Get directions</a>
-            </div>
-          </div>
-        </article>
+        <!-- Event cards are built from data/events.json (edited through Pages CMS) -->
+        <div class="events-list reveal" id="eventsList" aria-live="polite"></div>
+        <noscript><p class="events-empty">Please enable JavaScript to see our upcoming events, or follow us on Facebook.</p></noscript>
 
         <div class="more-events reveal">
           <p><b>More events coming soon.</b> Follow us on Facebook for the latest dates and details.</p>
@@ -813,15 +786,129 @@
     document.getElementById('years').textContent = now - 1982;
     document.getElementById('year').textContent = now;
 
-    // Countdown to the Christmas party (hidden once the day has passed)
-    const xmas = new Date(2026, 11, 21);
-    const today = new Date(); today.setHours(0, 0, 0, 0);
-    const daysLeft = Math.round((xmas - today) / 86400000);
-    const countdown = document.getElementById('xmasCountdown');
-    if (daysLeft >= 0) {
-      countdown.textContent = daysLeft === 0 ? '🎄 Today!' : daysLeft === 1 ? '🎄 Tomorrow!' : `🎄 ${daysLeft} days to go`;
-      countdown.hidden = false;
+    // ---------- Events (data/events.json) ----------
+    const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+    // "2026-12-21" -> local Date at midnight
+    const parseDate = s => { const [y, m, d] = String(s).split('-').map(Number); return new Date(y, m - 1, d); };
+
+    // "11:00 AM" -> "110000" (null if missing or unreadable)
+    const toIcsTime = t => {
+      const m = String(t || '').trim().match(/^(\d{1,2})(?::(\d{2}))?\s*([ap])\.?m\.?$/i);
+      if (!m) return null;
+      let h = Number(m[1]) % 12;
+      if (m[3].toLowerCase() === 'p') h += 12;
+      return String(h).padStart(2, '0') + (m[2] || '00') + '00';
+    };
+
+    const icsText = s => String(s || '').replace(/\\/g, '\\\\').replace(/;/g, '\\;').replace(/,/g, '\\,').replace(/\r?\n/g, '\\n');
+
+    // Calendar file for one event, in El Paso's time zone
+    function buildIcs(ev) {
+      const day = String(ev.date).replace(/-/g, '');
+      const start = toIcsTime(ev.start_time), end = toIcsTime(ev.end_time);
+      const next = parseDate(ev.date); next.setDate(next.getDate() + 1);
+      const nextDay = `${next.getFullYear()}${String(next.getMonth() + 1).padStart(2, '0')}${String(next.getDate()).padStart(2, '0')}`;
+      const when = start
+        ? [`DTSTART;TZID=America/Denver:${day}T${start}`, `DTEND;TZID=America/Denver:${day}T${end || start}`]
+        : [`DTSTART;VALUE=DATE:${day}`, `DTEND;VALUE=DATE:${nextDay}`];
+      const stamp = new Date().toISOString().replace(/[-:]/g, '').replace(/\.\d+/, '');
+      return [
+        'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Reach for a Star El Paso//Events//EN', 'CALSCALE:GREGORIAN', 'METHOD:PUBLISH',
+        'BEGIN:VTIMEZONE', 'TZID:America/Denver',
+        'BEGIN:DAYLIGHT', 'TZOFFSETFROM:-0700', 'TZOFFSETTO:-0600', 'TZNAME:MDT', 'DTSTART:19700308T020000', 'RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=2SU', 'END:DAYLIGHT',
+        'BEGIN:STANDARD', 'TZOFFSETFROM:-0600', 'TZOFFSETTO:-0700', 'TZNAME:MST', 'DTSTART:19701101T020000', 'RRULE:FREQ=YEARLY;BYMONTH=11;BYDAY=1SU', 'END:STANDARD',
+        'END:VTIMEZONE',
+        'BEGIN:VEVENT',
+        `UID:${day}-${String(ev.title).toLowerCase().replace(/[^a-z0-9]+/g, '-')}@reachforastarep.org`,
+        `DTSTAMP:${stamp}`,
+        ...when,
+        `SUMMARY:${icsText(ev.label ? `${ev.title} (${ev.label})` : ev.title)}`,
+        `LOCATION:${icsText([ev.venue, ev.address].filter(Boolean).join(', '))}`,
+        `DESCRIPTION:${icsText([ev.description, (ev.highlights || []).join(' · ')].filter(Boolean).join('\n\n'))}`,
+        'URL:https://reachforastarep.org/#events',
+        'END:VEVENT', 'END:VCALENDAR'
+      ].join('\r\n');
     }
+
+    function eventCard(ev, i) {
+      const date = parseDate(ev.date);
+      const today = new Date(); today.setHours(0, 0, 0, 0);
+      const daysLeft = Math.round((date - today) / 86400000);
+      const countdown = daysLeft === 0 ? '✨ Today!' : daysLeft === 1 ? '✨ Tomorrow!' : `✨ ${daysLeft} days to go`;
+      const longDate = date.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
+      const time = [ev.start_time, ev.end_time].filter(Boolean).join(' – ');
+      const place = [ev.venue, ev.address].filter(Boolean).join(' ');
+      const mapUrl = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(place);
+      const id = `event-${i}`;
+      return `
+        <article class="event" aria-labelledby="${id}">
+          <div class="event-photo">
+            ${ev.image ? `<img src="${esc(ev.image)}" alt="${esc(ev.image_alt)}" loading="lazy">` : ''}
+            <div class="event-date" aria-hidden="true">
+              <span class="m">${date.toLocaleDateString('en-US', { month: 'short' })}</span>
+              <span class="d">${date.getDate()}</span>
+              <span class="w">${date.toLocaleDateString('en-US', { weekday: 'long' })}</span>
+            </div>
+            <div class="event-countdown">${countdown}</div>
+          </div>
+          <div class="event-body">
+            ${ev.badge || ev.label ? `<div class="event-tags">
+              ${ev.badge ? `<span class="soon">${esc(ev.badge)}</span>` : ''}
+              ${ev.label ? `<span class="event-annual">${esc(ev.label)}</span>` : ''}
+            </div>` : ''}
+            <h3 id="${id}">${esc(ev.title)}</h3>
+            <ul class="event-meta">
+              <li><svg><use href="#i-calendar"/></svg><span><b>${longDate}</b>${time ? `<br>${esc(time)}` : ''}</span></li>
+              ${place ? `<li><svg style="fill:currentColor;stroke:none"><use href="#i-pin"/></svg><span>${ev.venue ? `<b>${esc(ev.venue)}</b><br>` : ''}${esc(ev.address)}</span></li>` : ''}
+            </ul>
+            ${ev.description ? `<p>${esc(ev.description)}</p>` : ''}
+            ${(ev.highlights || []).length ? `<ul class="event-fun" aria-label="Event highlights">${ev.highlights.map(h => `<li>${esc(h)}</li>`).join('')}</ul>` : ''}
+            <div class="event-actions">
+              <button class="btn btn-navy" type="button" data-ics="${i}"><svg><use href="#i-calendar"/></svg>Add to calendar</button>
+              ${place ? `<a class="btn btn-outline" href="${esc(mapUrl)}" target="_blank" rel="noopener"><svg style="fill:currentColor"><use href="#i-pin"/></svg>Get directions</a>` : ''}
+            </div>
+          </div>
+        </article>`;
+    }
+
+    async function loadEvents() {
+      const list = document.getElementById('eventsList');
+      const hint = document.getElementById('nextEventHint');
+      let events = [];
+      try {
+        const res = await fetch('data/events.json', { cache: 'no-cache' });
+        events = (await res.json()).events || [];
+      } catch (err) {
+        console.error('Could not load events', err);
+      }
+
+      // Only upcoming events, soonest first; past events hide themselves
+      const today = new Date(); today.setHours(0, 0, 0, 0);
+      const upcoming = events
+        .filter(ev => ev.title && ev.date && parseDate(ev.date) >= today)
+        .sort((a, b) => parseDate(a.date) - parseDate(b.date));
+
+      if (!upcoming.length) {
+        list.innerHTML = '<p class="events-empty">No upcoming events right now. Check back soon!</p>';
+        return;
+      }
+
+      list.innerHTML = upcoming.map(eventCard).join('');
+      const next = upcoming[0];
+      hint.textContent = `${next.short_title || next.title} · ${parseDate(next.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}`;
+
+      list.querySelectorAll('[data-ics]').forEach(btn => btn.addEventListener('click', () => {
+        const ev = upcoming[Number(btn.dataset.ics)];
+        const blob = new Blob([buildIcs(ev)], { type: 'text/calendar;charset=utf-8' });
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = `${String(ev.title).toLowerCase().replace(/[^a-z0-9]+/g, '-')}.ics`;
+        document.body.appendChild(a); a.click(); a.remove();
+        setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+      }));
+    }
+    loadEvents();
 
     // Header shadow on scroll
     const header = document.getElementById('header');

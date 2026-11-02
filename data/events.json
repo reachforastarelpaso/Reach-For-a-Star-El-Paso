@@ -1,0 +1,28 @@
+{
+  "events": [
+    {
+      "title": "Reach For a Star Christmas",
+      "short_title": "Christmas Party",
+      "label": "44th Annual Christmas Party",
+      "badge": "Coming soon",
+      "date": "2026-12-21",
+      "start_time": "11:00 AM",
+      "end_time": "3:00 PM",
+      "venue": "Casa Ortiz",
+      "address": "10167 Socorro Rd, Socorro, TX 79927",
+      "description": "Reach for a Star and other local community providers will be providing food and a gift to each child who attends.",
+      "highlights": [
+        "🎁 A gift for every child",
+        "🍽️ Food",
+        "☕ Hot chocolate",
+        "🍪 Cookies",
+        "🎅 Pictures with Santa",
+        "🎯 Game booths",
+        "❄️ Snow slide",
+        "✨ And more!"
+      ],
+      "image": "images/christmas.jpg",
+      "image_alt": "A child hugging Santa, with Mrs. Claus, an elf and the Grinch at a past Reach for a Star Christmas party"
+    }
+  ]
+}

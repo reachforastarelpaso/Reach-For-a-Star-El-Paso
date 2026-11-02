@@ -1,0 +1,70 @@
+# Pages CMS settings: https://pagescms.org
+# Defines the editing forms staff see when they log in at app.pagescms.org
+
+media:
+  input: images
+  output: images
+
+content:
+  - name: events
+    label: Events
+    type: file
+    path: data/events.json
+    fields:
+      - name: events
+        label: Events
+        description: Upcoming events show on the website, soonest first. Past events hide automatically, so there's no need to delete them right away.
+        type: object
+        list: true
+        fields:
+          - name: title
+            label: Event name
+            type: string
+            required: true
+          - name: short_title
+            label: Short name
+            description: Shown on the "Upcoming Events" button at the top of the page, e.g. "Christmas Party". Optional.
+            type: string
+          - name: label
+            label: Subtitle
+            description: Small red text above the name, e.g. "44th Annual Christmas Party". Optional.
+            type: string
+          - name: badge
+            label: Badge
+            description: Yellow tag such as "Coming soon" or "Free". Leave empty for none.
+            type: string
+          - name: date
+            label: Date
+            type: date
+            required: true
+          - name: start_time
+            label: Start time
+            description: Like "11:00 AM"
+            type: string
+          - name: end_time
+            label: End time
+            description: Like "3:00 PM"
+            type: string
+          - name: venue
+            label: Place name
+            description: e.g. "Casa Ortiz"
+            type: string
+          - name: address
+            label: Address
+            description: e.g. "10167 Socorro Rd, Socorro, TX 79927"
+            type: string
+          - name: description
+            label: Description
+            type: text
+          - name: highlights
+            label: Highlights
+            description: Short items shown as tags, e.g. "🎅 Pictures with Santa". Add one per line.
+            type: string
+            list: true
+          - name: image
+            label: Photo
+            type: image
+          - name: image_alt
+            label: Photo description
+            description: Briefly describe the photo for visitors who use screen readers.
+            type: string
