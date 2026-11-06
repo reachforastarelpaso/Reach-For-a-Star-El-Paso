@@ -1,0 +1,49 @@
+{
+  "photos": [
+    {
+      "image": "images/police.jpg",
+      "caption": "A concert wish, cheered on by local officers",
+      "alt": "A wish recipient holding a sign for Karol G, surrounded by police officers and supporters"
+    },
+    {
+      "image": "images/outdoors.jpg",
+      "caption": "Celebrating a brave young star",
+      "alt": "A smiling boy wearing a sash and holding a balloon, with two Reach for a Star supporters"
+    },
+    {
+      "image": "images/lucha.jpg",
+      "caption": "Lucha libre fun with masked wrestlers at Three Missions Brewery",
+      "alt": "Supporters posing in a wrestling ring with masked luchadores and championship belts at Three Missions Brewery"
+    },
+    {
+      "image": "images/magician.jpg",
+      "caption": "A magic show at our Easter party",
+      "alt": "A magician performing for a crowd of kids and families at the Reach for a Star Easter party"
+    },
+    {
+      "image": "images/under-bridge.jpg",
+      "caption": "Twin City Offroad helps grant a wish",
+      "alt": "Members of Twin City Offroad in matching shirts gathered beneath colorful freeway murals"
+    },
+    {
+      "image": "images/ice-cream.jpg",
+      "caption": "A birthday wish at the hospital with Abundant Home Health",
+      "alt": "Abundant Home Health team members with a birthday party set up in a hospital playroom"
+    },
+    {
+      "image": "images/target-2.jpg",
+      "caption": "Flowers, gifts and a day to remember",
+      "alt": "A teen holding a bouquet and gifts, with two Target team members"
+    },
+    {
+      "image": "images/shed.jpg",
+      "caption": "A backyard wish, sponsored by Tuff Shed El Paso",
+      "alt": "Tuff Shed El Paso team members and a family in front of a newly built, mural-painted shed"
+    },
+    {
+      "image": "images/balloons.jpg",
+      "caption": "Our team, ready to make wishes happen",
+      "alt": "Volunteers in Reach for a Star shirts in front of a balloon arch"
+    }
+  ]
+}

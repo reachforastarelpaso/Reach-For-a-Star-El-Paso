@@ -572,24 +572,15 @@
     </section>
 
     <!-- Gallery -->
-    <section class="section gallery-section" aria-labelledby="moments-title">
+    <section class="section gallery-section" id="gallerySection" aria-labelledby="moments-title">
       <div class="wrap">
         <div class="section-head reveal">
           <div class="eyebrow"><svg><use href="#i-star"/></svg>Moments of joy</div>
           <h2 id="moments-title">Wishes, granted with love</h2>
           <p>Every wish is made possible by a community that shows up: volunteers, local businesses, first responders and friends.</p>
         </div>
-        <div class="gallery reveal">
-          <figure><img src="images/police.jpg" width="1374" height="1145" alt="A wish recipient holding a sign for Karol G, surrounded by police officers and supporters" loading="lazy"><figcaption>A concert wish, cheered on by local officers</figcaption></figure>
-          <figure><img src="images/outdoors.jpg" width="1050" height="1400" alt="A smiling boy wearing a sash and holding a balloon, with two Reach for a Star supporters" loading="lazy"><figcaption>Celebrating a brave young star</figcaption></figure>
-          <figure><img src="images/lucha.jpg" width="1333" height="1400" alt="Supporters posing in a wrestling ring with masked luchadores and championship belts at Three Missions Brewery" loading="lazy"><figcaption>Lucha libre fun with masked wrestlers at Three Missions Brewery</figcaption></figure>
-          <figure><img src="images/magician.jpg" width="1050" height="1400" alt="A magician performing for a crowd of kids and families at the Reach for a Star Easter party" loading="lazy"><figcaption>A magic show at our Easter party</figcaption></figure>
-          <figure><img src="images/under-bridge.jpg" width="1400" height="1050" alt="Members of Twin City Offroad in matching shirts gathered beneath colorful freeway murals" loading="lazy"><figcaption>Twin City Offroad helps grant a wish</figcaption></figure>
-          <figure><img src="images/ice-cream.jpg" width="1400" height="1050" alt="Abundant Home Health team members with a birthday party set up in a hospital playroom" loading="lazy"><figcaption>A birthday wish at the hospital with Abundant Home Health</figcaption></figure>
-          <figure><img src="images/target-2.jpg" width="1050" height="1400" alt="A teen holding a bouquet and gifts, with two Target team members" loading="lazy"><figcaption>Flowers, gifts and a day to remember</figcaption></figure>
-          <figure><img src="images/shed.jpg" width="1050" height="1400" alt="Tuff Shed El Paso team members and a family in front of a newly built, mural-painted shed" loading="lazy"><figcaption>A backyard wish, sponsored by Tuff Shed El Paso</figcaption></figure>
-          <figure><img src="images/balloons.jpg" width="1050" height="1400" alt="Volunteers in Reach for a Star shirts in front of a balloon arch" loading="lazy"><figcaption>Our team, ready to make wishes happen</figcaption></figure>
-        </div>
+        <!-- Photos are built from data/gallery.json (edited through Pages CMS) -->
+        <div class="gallery reveal" id="gallery"></div>
       </div>
     </section>
 
@@ -909,6 +900,22 @@
       }));
     }
     loadEvents();
+
+    // ---------- Photo gallery (data/gallery.json) ----------
+    async function loadGallery() {
+      const section = document.getElementById('gallerySection');
+      let photos = [];
+      try {
+        const res = await fetch('data/gallery.json', { cache: 'no-cache' });
+        photos = ((await res.json()).photos || []).filter(p => p && p.image);
+      } catch { /* leave the gallery empty */ }
+      if (!photos.length) { section.hidden = true; return; }
+      document.getElementById('gallery').innerHTML = photos.map(p => {
+        const src = String(p.image).replace(/^\/+/, '');
+        return `<figure><img src="${esc(src)}" alt="${esc(p.alt || p.caption)}" loading="lazy" decoding="async">${p.caption ? `<figcaption>${esc(p.caption)}</figcaption>` : ''}</figure>`;
+      }).join('');
+    }
+    loadGallery();
 
     // Header shadow on scroll
     const header = document.getElementById('header');

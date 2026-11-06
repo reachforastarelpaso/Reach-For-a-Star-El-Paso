@@ -68,3 +68,27 @@ content:
             label: Photo description
             description: Briefly describe the photo for visitors who use screen readers.
             type: string
+
+  - name: gallery
+    label: Photo Gallery
+    type: file
+    path: data/gallery.json
+    fields:
+      - name: photos
+        label: Photos
+        description: Shown in the "Wishes, granted with love" gallery, in this order. Drag to reorder. Only upload photos the family has agreed to share publicly. Removing a photo hides it from the website, but anything uploaded stays in GitHub's history, so never upload a photo that must stay private. Large phone photos slow the site down, so please resize them to about 1400 pixels wide (under 1 MB) before uploading.
+        type: object
+        list: true
+        fields:
+          - name: image
+            label: Photo
+            type: image
+            required: true
+          - name: caption
+            label: Caption
+            description: Short line shown over the bottom of the photo, e.g. "A magic show at our Easter party".
+            type: string
+          - name: alt
+            label: Photo description
+            description: Briefly describe what's in the photo for visitors who use screen readers.
+            type: string
